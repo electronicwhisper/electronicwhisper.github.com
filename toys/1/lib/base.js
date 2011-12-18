@@ -1,5 +1,5 @@
 (function() {
-  var arrowDef, circleDef, compoundTest1, compoundTest2, create, definitions, lineDef, makeRenderTree, maxDepth, mouseToScaleRotate, mouseToTranslate, svgns, viewport;
+  var arrowDef, circleDef, compoundTest1, compoundTest2, create, definitions, idealize, lineDef, makeRenderTree, maxDepth, mouseToScaleRotate, mouseToTranslate, svgns, viewport;
   svgns = "http://www.w3.org/2000/svg";
   create = {
     svg: function(name, attrs) {
@@ -145,12 +145,13 @@
     translation = transform.identity();
     $("body").mousedown(function(e) {
       mouseIsDown = true;
-      return translation = mouseToTranslate(e.pageX, e.pageY);
+      translation = mouseToTranslate(e.pageX, e.pageY);
+      return false;
     });
     $("body").mouseup(function(e) {
       return mouseIsDown = false;
     });
-    return $("body").mousemove(function(e) {
+    $("body").mousemove(function(e) {
       var mouseTrans;
       if (!mouseIsDown) {
         mouseTrans = mouseToTranslate(e.pageX, e.pageY);
@@ -161,19 +162,30 @@
       }
       return global.draw();
     });
+    return $("body").mousewheel(function(e, delta, deltaX, deltaY) {
+      var myDelta, x, y, _ref;
+      _ref = idealize(e.pageX, e.pageY), x = _ref[0], y = _ref[1];
+      myDelta = delta > 0 ? 1.1 : 0.9;
+      viewport = viewport.translate(x, y).scale(myDelta).translate(-x, -y);
+      global.setTransform(viewport);
+      return global.draw();
+    });
   });
-  mouseToTranslate = function(x, y) {
+  idealize = function(x, y) {
     var inv;
     inv = viewport.inverse();
-    return transform.identity().translate(inv.x(x, y), inv.y(x, y));
+    return inv.p(x, y);
+  };
+  mouseToTranslate = function(x, y) {
+    var x1, y1, _ref;
+    _ref = idealize(x, y), x1 = _ref[0], y1 = _ref[1];
+    return transform.identity().translate(x1, y1);
   };
   mouseToScaleRotate = function(translation, x, y) {
-    var a, b, c, d, e, f, inv, x1, x2, y1, y2;
+    var a, b, c, d, e, f, x1, x2, y1, y2, _ref;
     x1 = translation.e;
     y1 = translation.f;
-    inv = viewport.inverse();
-    x2 = inv.x(x, y);
-    y2 = inv.y(x, y);
+    _ref = idealize(x, y), x2 = _ref[0], y2 = _ref[1];
     a = x2 - x1;
     b = y2 - y1;
     c = -b;

@@ -118,6 +118,7 @@ $ () ->
   $("body").mousedown (e) ->
     mouseIsDown = true
     translation = mouseToTranslate(e.pageX, e.pageY)
+    return false # prevent auto-dragging shenanigans in Firefox
   $("body").mouseup (e) ->
     mouseIsDown = false
   
@@ -130,6 +131,15 @@ $ () ->
       compoundTest2.consists[1].transform = mouseTrans
     global.draw()
   
+  $("body").mousewheel (e, delta, deltaX, deltaY) ->
+    [x, y] = idealize(e.pageX, e.pageY)
+    myDelta = if delta > 0 then 1.1 else 0.9
+    # viewport = viewport.scale(myDelta)
+    viewport = viewport.translate(x, y).scale(myDelta).translate(-x, -y)
+    global.setTransform(viewport)
+    global.draw()
+    # console.log(delta, deltaX, deltaY)
+  
   # $("body").click (e) ->
   #   compoundTest2.consists[1].transform = transform.identity().translate(0.2,Math.random()*0.3).scale(0.8)
   #   global.draw()
@@ -139,15 +149,16 @@ $ () ->
 
 
 # converting mouse coordinates to transforms (given the viewport)
-mouseToTranslate = (x, y) ->
+idealize = (x, y) ->
   inv = viewport.inverse()
-  transform.identity().translate(inv.x(x, y), inv.y(x, y))
+  inv.p(x, y)
+mouseToTranslate = (x, y) ->
+  [x1, y1] = idealize(x, y)
+  transform.identity().translate(x1, y1)
 mouseToScaleRotate = (translation, x, y) ->
   x1 = translation.e
   y1 = translation.f
-  inv = viewport.inverse()
-  x2 = inv.x(x, y)
-  y2 = inv.y(x, y)
+  [x2, y2] = idealize(x, y)
   
   a = x2 - x1
   b = y2 - y1
