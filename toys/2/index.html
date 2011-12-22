@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font: 13px "Optima", "Helvetica", "Arial", sans-serif;
+        color: #333;
+        line-height: 1.5;
+      }
+      .arrow {
+        opacity: 0.5;
+      }
+      .arrow .colored {
+        fill-opacity: 0;
+      }
+      .arrow .handle {
+        fill-opacity: 0;
+        visibility: hidden;
+      }
+      .arrow .handle:hover {
+        fill-opacity: 0.6;
+      }
+      .arrow.selected .handle, .arrow.hovered .handle {
+        visibility: inherit;
+      }
+      .arrow .colored {
+        stroke: green; fill: green;
+      }
+      .arrow.origin {
+        pointer-events: none;
+      }
+      .arrow.origin .colored {
+        stroke-dasharray: .01;
+        stroke: blue; fill: blue;
+      }
+      .arrow.hovered .colored {
+        stroke: orange; fill: orange;
+      }
+      .arrow.selected .colored {
+        stroke: red; fill: red;
+      }
+      .arrow.hovered, .arrow.selected {
+        opacity: 1;
+      }
+      .arrow.recursed {
+        opacity: 0.3;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .arrow.recursed.selected {
+        visibility: inherit;
+      }
+    </style>
+    
+    <script src="lib/jquery-1.7.1.min.js"></script>
+    <script src="lib/jquery.mousewheel.js"></script>
+    
+    <script src="lib/underscore-min.js"></script>
+    <!--<script src="lib/raphael-min.js"></script>-->
+    
+    <script src="lib/jquery.svg.package-1.4.4/jquery.svg.js"></script>
+    <script src="lib/jquery.svg.package-1.4.4/jquery.svgdom.js"></script>
+    
+    <script src="lib/transform.js"></script>
+    <script src="lib/base.js"></script>
+    
+  </head>
+  <body style="overflow:hidden">
+    <div style="position: absolute; top: 10px; left: 10px">
+      Drag the circles around. Drag the arrows around.<br />
+      Resize and rotate by dragging the tips of the arrows.
+    </div>
+    <div id="container" style="width:100%; height: 100%; position: absolute; top:0; left:0;">
+      <svg id="svg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <g class="shapes"></g>
+        <g class="arrows"></g>
+      </svg>
+    </div>
+  </body>
+</html>

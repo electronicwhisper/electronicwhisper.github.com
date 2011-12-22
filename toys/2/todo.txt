@@ -1,0 +1,59 @@
+
+
+adjust scale & rotate
+
+drag/scale at any depth
+
+select multiple objects
+
+show definitions in bottom row
+create object
+
+add variations
+
+breadth-first rendering?
+
+add other attributes to transform
+  opacity
+  color
+
+
+
+
+
+
+
+
+ui states
+  default
+    drag canvas to pan
+    mousedown on component to select
+  component selected
+    show arrow handles
+  component being resized/rotated
+  definition selected to create (show it at "natural" scale, semi-transparent (ghost), translating with mouse)
+
+
+ui things
+  definition shown on screen
+  component being edited
+  definition hovered
+  definition (in bottom row) hovered
+
+
+each svg will keep
+  a class that says what definition it is (might be several)
+
+some will keep
+  a class that says which object it is
+
+
+ui concepts
+  hover: applies to definitions, slight glow?, consistent throughout the interface at all levels to show instances of a definition
+    how does it apply to nested definitions in the viewport?
+      maybe the first level applies all the way down
+      that is, on hover go up the tree to the first level, then highlight anything of that definition
+  selected: applies to components, highlight the arrow, show handles (circles) on the arrow
+    to check: check that it's the object and that the depth == 1 (first level)
+  editing: the definition currently in the viewport (root of viewport renderTree), only needs to be indicated in the bottom row with "Editing..."
+    click on "Edit" to choose a different one (plus arrow key shortcut?)
