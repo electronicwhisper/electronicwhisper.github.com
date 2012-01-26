@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+body {
+  font-family: Optima;
+  color: #333;
+  line-height: 1.5;
+}
+.image {
+	background-image: url('charlene.jpg');
+	width: 640px;
+	height: 480px;
+}
+</style>
+
+<script src="https://raw.github.com/mrdoob/stats.js/master/build/Stats.js"></script>
+<script src="https://raw.github.com/boblemarin/Sprite3D.js/master/js/Sprite3D.js"></script>
+<script src="https://raw.github.com/marquete/kibo/master/kibo.js"></script>
+
+
+</head>
+<body>
+
+
+
+<div style="position: absolute; top: 60px; left: 20px">Navigate with arrow keys.<br/>Use Safari (Chrome has weird clipping bug).</div>
+
+
+<script>
+var stats = new Stats();
+
+// Align top-left
+stats.getDomElement().style.position = 'absolute';
+stats.getDomElement().style.left = '0px';
+stats.getDomElement().style.top = '0px';
+
+document.body.appendChild( stats.getDomElement() );
+
+setInterval( function () {
+
+    stats.update();
+
+}, 1000 / 60 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var stage = Sprite3D.createCenteredContainer();
+
+var orienter = new Sprite3D().moveZ(800).update(); // needed to correct for the "perspective"
+stage.addChild(orienter);
+
+
+var camera = new Sprite3D();
+camera.transformString = "_rx _ry _rz _p _s";
+
+orienter.addChild(camera);
+
+
+
+camera.addChild(new Sprite3D().setClassName("image").setRegistrationPoint(320, 240, 0).move(0, 0, 0).setOpacity(0.5).update());
+camera.addChild(new Sprite3D().setClassName("image").setRegistrationPoint(320, 240, 0).move(0, 0, -1000).update());
+camera.addChild(new Sprite3D().setClassName("image").setRegistrationPoint(320, 240, 0).move(-1000, 0, -1000).update());
+camera.addChild(new Sprite3D().setClassName("image").setRegistrationPoint(320, 240, 0).move(-1000, 0, 0).update());
+
+camera.addChild(new Sprite3D().setClassName("image").setRegistrationPoint(320, 240, 0).move(0, 240, 0).rotateX(90).setScale(20, 20, 1).update());
+
+
+
+
+
+
+
+var forward = 0;
+var turn = 0;
+
+var k = new Kibo();
+
+k.down("up", function () {
+  forward = 20;
+});
+k.down("down", function () {
+  forward = -20;
+});
+k.up(["down", "up"], function () {
+  forward = 0;
+});
+k.down("left", function () {
+  turn = -3;
+});
+k.down("right", function () {
+  turn = 3;
+});
+k.up(["left", "right"], function () {
+  turn = 0;
+});
+
+
+
+function render() {
+  var time = (new Date()).getTime();
+  
+  var angle = camera.rotationY * Math.PI * 2 / 360;
+  
+  camera.moveX(-Math.sin(angle) * forward);
+  camera.moveZ(Math.cos(angle) * forward);
+  
+  camera.rotateY(turn);
+  
+  
+  camera.update();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame    || 
+          window.oRequestAnimationFrame      || 
+          window.msRequestAnimationFrame     || 
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+
+// usage: 
+// instead of setInterval(render, 16) ....
+
+(function animloop(){
+  requestAnimFrame(animloop);
+  render();
+})();
+// place the rAF *before* the render() to assure as close to 
+// 60fps with the setTimeout fallback.
+
+
+
+</script>
+
+</body>
+</html>
