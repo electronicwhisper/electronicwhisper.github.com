@@ -96,6 +96,9 @@ ui = {
   dragging: false
 }
 
+
+draws = false
+
 canvas = null
 ctx = null
 init = () ->
@@ -103,9 +106,7 @@ init = () ->
   ctx = canvas[0].getContext('2d')
   
   setSize()
-  $(window).resize () ->
-    setSize()
-    render()
+  $(window).resize(setSize)
   
   
   $(window).mousemove (e) ->
@@ -211,6 +212,9 @@ setSize = () ->
   
   minDimension = Math.min(windowSize[0], windowSize[1])
   ui.view = makeTransform([minDimension/2, 0, 0, minDimension/2, windowSize[0]/2, windowSize[1]/2])
+  
+  draws = false # regenerate draws
+  render()
 
 
 
@@ -329,7 +333,7 @@ renderDraws = (draws, ctx) ->
 
 
 
-draws = false
+
 render = () ->
   if !draws || ui.dragging
     draws = generateDraws(ui.focus, ui.view)

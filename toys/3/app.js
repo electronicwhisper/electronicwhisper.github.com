@@ -91,6 +91,8 @@
     dragging: false
   };
 
+  draws = false;
+
   canvas = null;
 
   ctx = null;
@@ -99,10 +101,7 @@
     canvas = $("#main");
     ctx = canvas[0].getContext('2d');
     setSize();
-    $(window).resize(function() {
-      setSize();
-      return render();
-    });
+    $(window).resize(setSize);
     $(window).mousemove(function(e) {
       var a, c0, components, mouse, objective, originalCenter, solution, target, uncmin;
       ui.mouse = [e.clientX, e.clientY];
@@ -188,7 +187,9 @@
       height: windowSize[1]
     });
     minDimension = Math.min(windowSize[0], windowSize[1]);
-    return ui.view = makeTransform([minDimension / 2, 0, 0, minDimension / 2, windowSize[0] / 2, windowSize[1] / 2]);
+    ui.view = makeTransform([minDimension / 2, 0, 0, minDimension / 2, windowSize[0] / 2, windowSize[1] / 2]);
+    draws = false;
+    return render();
   };
 
   config = {
@@ -198,7 +199,7 @@
   };
 
   generateDraws = function(definition, initialTransform) {
-    var draws, i, process, queue;
+    var i, process, queue;
     queue = [];
     draws = [];
     process = function(definition, transform, componentPath) {
@@ -288,8 +289,6 @@
       }
     });
   };
-
-  draws = false;
 
   render = function() {
     var check;
