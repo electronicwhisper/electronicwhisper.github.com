@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <link rel="stylesheet" href="compiled/css/font/font-awesome.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+<link rel="stylesheet" href="vendor/jquery.contextMenu/jquery.contextMenu.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+<link rel="stylesheet" href="compiled/css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<title>Recursive Drawing</title>
+</head>
+<body>
+
+<!-- <div style="position: absolute; top: 10px; left: 10px">
+  Click and drag the circles.
+</div> -->
+
+<div id="workspace">
+  <canvas id="workspaceCanvas"></canvas>
+</div>
+
+<div id="sidebar">
+  <div id="definitions"></div>
+  <!-- <div id="addDefinition">
+    <i class="icon-plus"></i>
+  </div> -->
+  <button class="button" id="addDefinition">+</button>
+</div>
+
+<script src="vendor/numeric-1.0.2.min.js"></script>
+<script src="vendor/underscore-min.js"></script>
+
+<script src="vendor/keymaster.min.js"></script>
+
+<script src="vendor/jquery-1.7.2.min.js"></script>
+<script src="vendor/jquery.mousewheel.js"></script>
+<script src="vendor/jquery.contextMenu/jquery.contextMenu.js"></script>
+<script src="vendor/jquery.contextMenu/jquery.ui.position.js"></script>
+
+<script src="vendor/stats.js"></script>
+
+<script src="compiled/app.js"></script>
+
+<script>
+require("app")();
+</script>
+
+</body>
+</html>
