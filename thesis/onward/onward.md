@@ -8,7 +8,7 @@ I intend to take a very broad definition for the words "programming" and "interf
 
 # What are Alternative Programming Interfaces?
 
-I will divide programming interfaces into three aspects: physical, conceptual, and social.
+I will divide programming interfaces into three overlapping aspects: physical, conceptual, and social.
 
 ## Physical Interfaces
 
@@ -60,7 +60,7 @@ Finally, the question of who should program I will address in the next section.
 
 Many profound advances in programming were the result of people reconsidering the question, *who are the programmers*? Engelbart's NLS expanded the view of programmers from business analysts and artificial intelligence researchers to any information worker. Smalltalk originally focused on children as programmers. Hypercard was developed and distributed at Bill Atkinson's insistence that "end users" need programming capabilities. [http://www.savetz.com/ku/ku/quick_genius_behind_hypercard_bill_atkinson_the_november_1987.html] Even web programming, at least initially, promoted a culture where anybody could contribute their content or software to the web. [There seems to be a pattern where an environment is developed for alternative programmers, then as a consequence of success is overtaken by "real" programmers. Adobe Flash, originally designed for animators who wanted to add interaction, also follows this pattern.]
 
-I believe a new generation of programmers is emerging. These "alternative" programmers are anybody who, if you ask them what they do, would not reply "I am a programmer", yet who regularly program computers in order to achieve their goals. Alternative programmers can include for example musicians, performers, writers, visual artists, game designers, scientists, architects, and activists.
+I believe a new generation of programmers is emerging. These "alternative" programmers are anybody who, if you ask them what they do, would not reply "I am a programmer", yet who regularly program computers in order to achieve their goals. Alternative programmers can include for example musicians, performers, writers, visual artists, designers, scientists, architects, and activists.
 
 Evidence of this emergence includes:
 
