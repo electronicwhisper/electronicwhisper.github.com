@@ -8,7 +8,7 @@ For example, users approach software differently than the creators of the softwa
 
 The same applies to programmers approaching existing code. When we choose our representation for the program, we limit the ways in which we can easily modify the program. By "easily modify" I mean transforming the program without choosing new primitives--what programmers appropriately call "refactoring". This is why experienced developers think long and hard about the primitives they will use before they touch the keyboard.
 
-Is there a way make refactoring cheaper? Is there an approach to program design that will not conceptually lock us in to the primitives we initially chose, so that we can better consider the various contexts in which our software might be used?
+Is there a way make refactoring cheaper? Is there an approach to program design that will not conceptually lock us in to the primitives we initially choose, so that we can open our minds to the various contexts in which our software might be used?
 
 This is of course a deep challenge, but I believe we can better attack it with a shift in mindset.
 
