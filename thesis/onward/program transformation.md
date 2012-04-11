@@ -18,7 +18,7 @@ This is analogous to the shift in mindset from set theory to category theory. In
 
 I'll provide two examples from Recursive Drawing. In each case, I will show how my initial design reflected a reductionist mindset, then how I rethought the issue from a transformation-centric mindset.
 
-## Fixed Coordinate Systems
+## Relativity
 
 The first example relates to how we traditionally use coordinate systems. In Context Free Art, the underlying representation consists of a hierarchy of coordinate systems. The nest-able coordinate system is a key primitive on which Context Free Art programs are built.
 
